@@ -25,6 +25,7 @@ const buildings = [
 ];
 
 
+
 function cost(b) {
   return Math.floor(b.baseCost * Math.pow(1.15, b.amount));
 }

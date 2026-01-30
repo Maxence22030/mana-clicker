@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mana-Clicker</title>
+  <style>
+    body { font-family: Arial; background:#0b0f1a; color:#e0e0ff; text-align:center; }
+    button { padding:10px 15px; margin:5px; background:#5b4bff; color:white; border:none; cursor:pointer; }
+    button:disabled { background:#333; cursor:not-allowed; }
+    .building { border:1px solid #444; margin:5px auto; padding:5px; width:300px; }
+  </style>
+</head>
+<body>
+
+<h1>🔮 Mana-Clicker</h1>
+
+<p>Mana : <span id="mana">0</span></p>
+<p>Mana / seconde : <span id="mps">0</span></p>
+
+<button id="click">Générer du mana</button>
+
+<h2>Bâtiments</h2>
+<div id="buildings"></div>
+
+<script src="script.js"></script>
+</body>
+</html>

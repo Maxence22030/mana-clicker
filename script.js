@@ -1,6 +1,8 @@
 let mana = 0;
 let manaPerSecond = 0;
+let clickPower = 1;
 
+// Tous les bâtiments avec coûts de base et mana/sec
 const buildings = [
   { name: "Cursor", baseCost: 15, baseMps: 0.1, amount: 0 },
   { name: "Former", baseCost: 100, baseMps: 1, amount: 0 },
@@ -24,16 +26,17 @@ const buildings = [
   { name: "Omniscience", baseCost: 5.4e26, baseMps: 5.1e14, amount: 0 }
 ];
 
-
-
+// Fonction pour calculer le coût actuel d’un bâtiment
 function getCost(b) {
   return Math.floor(b.baseCost * Math.pow(1.15, b.amount));
 }
 
+// Mettre à jour le mana/sec total
 function updateMps() {
   manaPerSecond = buildings.reduce((sum, b) => sum + b.amount * b.baseMps, 0);
 }
 
+// Mettre à jour l’UI (mana, mana/sec, boutons)
 function updateUI() {
   document.getElementById("mana").textContent = Math.floor(mana);
   document.getElementById("mps").textContent = manaPerSecond.toFixed(1);
@@ -50,7 +53,7 @@ function updateUI() {
       <strong>${b.name}</strong><br>
       Possédés : ${b.amount}<br>
       Coût : ${cost}<br>
-      <button ${mana < cost ? "disabled" : ""} onclick="buy(${i})">
+      <button ${mana < cost ? "disabled" : ""} onclick="buyBuilding(${i})">
         Acheter
       </button>
     `;
@@ -58,8 +61,9 @@ function updateUI() {
   });
 }
 
-function buy(i) {
-  const b = buildings[i];
+// Acheter un bâtiment
+function buyBuilding(index) {
+  const b = buildings[index];
   const cost = getCost(b);
   if (mana >= cost) {
     mana -= cost;
@@ -69,15 +73,17 @@ function buy(i) {
   }
 }
 
+// Clic manuel
 document.getElementById("click").onclick = () => {
-  mana++;
+  mana += clickPower;
   updateUI();
 };
 
+// Génération automatique toutes les secondes
 setInterval(() => {
   mana += manaPerSecond;
   updateUI();
 }, 1000);
 
+// Initialisation de l’UI
 updateUI();
-

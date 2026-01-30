@@ -2,7 +2,6 @@ let mana = 0;
 let manaPerSecond = 0;
 
 const buildings = [
-const buildings = [
   { name: "Cursor", baseCost: 15, baseMps: 0.1, amount: 0 },
   { name: "Former", baseCost: 100, baseMps: 1, amount: 0 },
   { name: "Generatino Chain", baseCost: 1100, baseMps: 8, amount: 0 },

@@ -26,15 +26,12 @@ const buildings = [
 
 
 
-function cost(b) {
+function getCost(b) {
   return Math.floor(b.baseCost * Math.pow(1.15, b.amount));
 }
 
 function updateMps() {
-  manaPerSecond = buildings.reduce(
-    (sum, b) => sum + b.amount * b.baseMps,
-    0
-  );
+  manaPerSecond = buildings.reduce((sum, b) => sum + b.amount * b.baseMps, 0);
 }
 
 function updateUI() {
@@ -45,14 +42,15 @@ function updateUI() {
   container.innerHTML = "";
 
   buildings.forEach((b, i) => {
-    const c = cost(b);
+    const cost = getCost(b);
     const div = document.createElement("div");
+    div.className = "building";
 
     div.innerHTML = `
       <strong>${b.name}</strong><br>
       Possédés : ${b.amount}<br>
-      Coût : ${c}<br>
-      <button ${mana < c ? "disabled" : ""} onclick="buy(${i})">
+      Coût : ${cost}<br>
+      <button ${mana < cost ? "disabled" : ""} onclick="buy(${i})">
         Acheter
       </button>
     `;
@@ -62,9 +60,9 @@ function updateUI() {
 
 function buy(i) {
   const b = buildings[i];
-  const c = cost(b);
-  if (mana >= c) {
-    mana -= c;
+  const cost = getCost(b);
+  if (mana >= cost) {
+    mana -= cost;
     b.amount++;
     updateMps();
     updateUI();
@@ -82,3 +80,4 @@ setInterval(() => {
 }, 1000);
 
 updateUI();
+
